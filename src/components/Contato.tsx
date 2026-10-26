@@ -1,4 +1,5 @@
-import { clinica, mensagemClinica, whatsappLink, type Modelo } from "@/lib/site";
+import { abrirWhatsAppClinica } from "@/lib/whatsapp";
+import { demo, clinica, mensagemClinica, whatsappLink, type Modelo } from "@/lib/site";
 import { IconeWhatsApp } from "./Icone";
 
 export default function Contato({ modelo }: { modelo: Modelo }) {
@@ -25,6 +26,7 @@ export default function Contato({ modelo }: { modelo: Modelo }) {
           </address>
           <a
             href={whatsappLink(mensagemClinica(`Olá! Tenho uma dúvida sobre a ${modelo.nome}.`))}
+      onClick={(e) => { if (demo.ativa) { e.preventDefault(); abrirWhatsAppClinica(mensagemClinica(`Olá! Tenho uma dúvida sobre a ${modelo.nome}.`)); } }}
             target="_blank" rel="noopener noreferrer"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-700 px-6 py-3 font-semibold text-white hover:bg-brand-800"
           >

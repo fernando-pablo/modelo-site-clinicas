@@ -27,8 +27,9 @@ Um único projeto atende quatro tipos de negócio: **clínica médica, odontolog
 
 ## Modo demonstração
 Em `src/lib/site.ts`, o objeto `demo` controla a faixa do topo e o destino das mensagens:
-- `ativa: true` → mostra a faixa "Site modelo da Lychnos Tech", envia todas as mensagens para o WhatsApp de `demo.whatsapp`
-  marcadas com **[Teste do modelo de site para clínicas]** e pede ao Google para não indexar a clínica fictícia.
+- `ativa: true` → mostra a faixa "Site modelo da Lychnos Tech" e pede ao Google para não indexar a clínica fictícia.
+  Agendamentos e contatos com a "recepção" **não são enviados**: aparecem numa simulação de conversa do WhatsApp na tela.
+  Só o botão **Quero um site assim** abre o WhatsApp de `demo.whatsapp`, para receber contatos de interessados.
 - Para um cliente real: `ativa: false`, troque o `whatsapp`, o endereço e deixe só o modelo do cliente em `modelos`.
 - `portfolio`: coloque o link do seu portfólio para o rodapé apontar para ele.
 

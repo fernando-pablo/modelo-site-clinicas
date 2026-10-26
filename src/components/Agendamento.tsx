@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { clinica, demo, formatarDias, mensagemClinica, whatsappLink, type Modelo } from "@/lib/site";
+import { abrirWhatsAppClinica } from "@/lib/whatsapp";
 import {
   baixarICS, dataCompleta, dataCurta, fromISO, horariosDoDia, linkGoogleAgenda, ocupadoNaDemonstracao, proximosDias, toISO,
 } from "@/lib/agenda";
@@ -88,9 +89,9 @@ export default function Agendamento({ modelo, pedido }: Props) {
       atendimento,
     ].filter(Boolean);
 
-    const link = whatsappLink(mensagemClinica(linhas.join("\n")));
-    window.open(link, "_blank", "noopener,noreferrer");
-    setLinkEnviado(link);
+    const texto = mensagemClinica(linhas.join("\n"));
+    abrirWhatsAppClinica(texto);
+    setLinkEnviado(whatsappLink(texto));
     setErro("");
     setEnviado(true);
   }
@@ -259,15 +260,21 @@ export default function Agendamento({ modelo, pedido }: Props) {
             Enviar pedido pelo WhatsApp
           </button>
           <p className="mt-3 text-center text-xs text-slate-500">
-            Abre o seu WhatsApp com a mensagem pronta para a recepção, que responde confirmando o horário.
+            {demo.ativa
+              ? "Na demonstração, você vê na tela como a mensagem chegaria à recepção."
+              : "Abre o seu WhatsApp com a mensagem pronta para a recepção, que responde confirmando o horário."}
           </p>
 
           {enviado && !erro && (
             <div role="status" className="mt-6 rounded-2xl bg-brand-50 p-5">
-              <p className="font-display text-lg font-semibold text-brand-800">Pedido pronto para envio</p>
+              <p className="font-display text-lg font-semibold text-brand-800">
+                {demo.ativa ? "Pedido montado" : "Pedido pronto para envio"}
+              </p>
               <p className="mt-1 text-sm text-slate-700">
                 {especialidade.titulo}{profissional ? ` com ${profissional}` : ""}, {dataCompleta(data)} às {horario}.
-                Toque em enviar no WhatsApp; a recepção responde confirmando a consulta.
+                {demo.ativa
+                  ? " Na demonstração, a conversa é simulada na tela. No site de uma clínica, a mensagem vai para o WhatsApp da recepção."
+                  : " Toque em enviar no WhatsApp; a recepção responde confirmando a consulta."}
               </p>
               <p className="mt-4 text-sm font-medium text-slate-800">Guarde um lembrete na sua agenda:</p>
               <div className="mt-2 flex flex-wrap gap-2">
@@ -279,10 +286,12 @@ export default function Agendamento({ modelo, pedido }: Props) {
                   className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-brand-800 ring-1 ring-brand-100 hover:ring-brand-600">
                   Agenda do celular
                 </button>
+                {!demo.ativa && (
                 <a href={linkEnviado} target="_blank" rel="noopener noreferrer"
                   className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 underline underline-offset-4 hover:text-brand-800">
                   O WhatsApp não abriu? Toque aqui
                 </a>
+                )}
               </div>
             </div>
           )}

@@ -12,6 +12,7 @@ import Duvidas from "./Duvidas";
 import Contato from "./Contato";
 import Rodape from "./Rodape";
 import BotaoWhatsApp from "./BotaoWhatsApp";
+import SimulacaoWhatsApp from "./SimulacaoWhatsApp";
 
 export type PedidoAgendamento = { especialidadeId?: string; profissional?: string; data?: string };
 
@@ -81,6 +82,7 @@ export default function ClinicaDemo() {
       </main>
       <Rodape modelo={modelo} />
       <BotaoWhatsApp modelo={modelo} />
+      <SimulacaoWhatsApp modelo={modelo} />
     </div>
   );
 }

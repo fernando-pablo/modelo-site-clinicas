@@ -3,9 +3,9 @@
 // ============================================================
 
 // ---------- Demonstração (Lychnos Tech) ----------
-// Enquanto `ativa` for true, aparece a faixa de demonstração no topo e todas as
-// mensagens de WhatsApp vão para o número abaixo (o seu), marcadas como teste.
-// Para um cliente real: ativa: false e troque `whatsapp` pelo número da clínica.
+// Enquanto `ativa` for true, aparece a faixa de demonstração no topo, os pedidos de agendamento
+// aparecem numa simulação de conversa (nada é enviado) e só o botão "Quero um site assim"
+// abre o seu WhatsApp. Para um cliente real: ativa: false e troque `whatsapp` pelo número da clínica.
 export const demo = {
   ativa: true,
   agencia: "Lychnos Tech",
@@ -348,9 +348,9 @@ export function whatsappLink(message: string) {
   return `https://wa.me/${clinica.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
-// Na demonstração, as mensagens chegam marcadas para você saber que vieram do teste.
+// Mensagens enviadas à clínica. (Na demonstração, elas só aparecem na simulação; veja lib/whatsapp.ts.)
 export function mensagemClinica(texto: string) {
-  return demo.ativa ? `[Teste do modelo de site para clínicas]\n${texto}` : texto;
+  return texto;
 }
 
 export const NOMES_DIAS = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
