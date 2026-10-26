@@ -13,12 +13,12 @@ export const demo = {
   mensagemInteresse:
     "Olá, Fernando! Vi o modelo de site para clínicas da Lychnos Tech e quero um site assim para o meu negócio.",
   // Link do seu portfólio (aparece no rodapé). Deixe "" para esconder.
-  portfolio: "",
+  portfolio: "https://lychnostech.vercel.app",
 };
 
 // ---------- Dados que valem para todos os modelos ----------
 export const clinica = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://clinica-exemplo.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://modelo-site-clinicas.vercel.app",
   whatsapp: demo.whatsapp,
   email: "contato@clinicaexemplo.com.br",
   address: { street: "Av. Principal, 100 - Centro", city: "Jaíba", region: "MG", zip: "39508-000" },
