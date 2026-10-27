@@ -1,8 +1,19 @@
 import type { MetadataRoute } from "next";
-import { clinica, demo } from "@/lib/site";
 
+// Site modelo (clínica fictícia):
+// - LinkedInBot liberado para gerar a prévia do link no LinkedIn.
+// - Demais robôs (incluindo o Google) bloqueados para não indexar uma clínica que não existe.
 export default function robots(): MetadataRoute.Robots {
-  // Na demonstração, pede aos buscadores para não indexar a clínica fictícia.
-  if (demo.ativa) return { rules: { userAgent: "*", disallow: "/" } };
-  return { rules: { userAgent: "*", allow: "/" }, sitemap: `${clinica.url}/sitemap.xml` };
+  return {
+    rules: [
+      {
+        userAgent: "LinkedInBot",
+        allow: "/",
+      },
+      {
+        userAgent: "*",
+        disallow: "/",
+      },
+    ],
+  };
 }
